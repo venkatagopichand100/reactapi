@@ -1,0 +1,40 @@
+In React,
+1) React is not having any tools, functions or any thing like objects for making HTTP CALLS.
+2) React can only do this things
+ a) showing the content and handling events, props, state
+3) without knowing the react, we can do HTTP calls
+
+
+to do the http calls we have to use axios in react
+
+1) to make any requests we have to use axios or fetch
+
+In javascript axios
+
+syntax: Axios
+
+axios.get(url, {
+    headers: {
+
+    },
+
+    params: {
+
+    }
+});
+
+here 
+1) get: Request method also we have put, post, del, patch
+2) URL: where we want to make the request to the server
+3) headers: headers that we want to add into the request
+4) params: key-value pairs that will be turned into a query string and added to the URL
+
+axios.get('https://api.unsplash.com/search/photos', {
+    headers: {
+        Authorization: Client-ID JC9jax40jXvMoppukxjDJYlzp2iQ1KQx3ppObgoSfgA
+    },
+
+    params: {
+        query: "mobiles"
+    }
+});
