@@ -1,0 +1,291 @@
+Mongodb is the database, nothing nosql database means there is no relationship b/w the data.
+
+"Mongodb is a document database with the scalablity and flexibility that we want with the querying the data"
+
+
+Document based: Mongodb stores data in documents ( key-value pair data structures)
+
+flexibility: no document data schema is requried, so each document can have different number and typs of fields
+
+
+Mongodb DB IS THE DOCUMENT database
+
+BSON: Data fomate where Mongodb used for data storage
+
+{
+    "title" : "About Mongodb",
+    "autor" : "venkata M",
+    "location" : "bangalore",
+    "tech": ["HTML", "Javascript", "Bootstrap],
+    "comments":[
+        {"tech": "HTML: this is document tech to create the UI pages"},
+        {"tech": "CSS: this is for cascadding style sheet"},
+        {"tech": "javascript: this is used to create the functions or events}
+    ]
+}
+
+if we wanted to store the data in the database Mongodb is providing "Atlas"
+
+CRUD opertions:
+
+Create, Read, Update and Delete
+
+Create:
+ insertOne(data),
+ insertMany(data)
+
+
+Read:
+ find(filter)
+ findOne(filter)
+
+update:
+    updateOne()
+    updateMany()
+    replaceOne
+
+Delete:
+deleteOne()
+deleteMany()
+
+
+Microsoft Windows [Version 10.0.19045.3803]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Ext12834>mongosh
+Current Mongosh Log ID: 65859ba50d8290ac52c368a2
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1
+Using MongoDB:          7.0.4
+Using Mongosh:          2.1.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-12-22T19:47:20.386+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin   40.00 KiB
+config  72.00 KiB
+local   40.00 KiB
+test> use admin
+switched to db admin
+admin> show dbs
+admin   40.00 KiB
+config  72.00 KiB
+local   40.00 KiB
+admin> use local
+switched to db local
+local> use studentdetails
+switched to db studentdetails
+studentdetails> show dbs
+admin   40.00 KiB
+config  72.00 KiB
+local   40.00 KiB
+studentdetails> db.studentdetails.insertOne({)
+Uncaught:
+SyntaxError: Unexpected token (1:29)
+
+> 1 | db.studentdetails.insertOne({)
+    |                              ^
+  2 |
+
+studentdetails> db.studentdetails.insertOne({"name": "venkat", "place": "bangalore", "pincode": "43244"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6585a57c0d8290ac52c368a3')
+}
+studentdetails> show dbs
+admin           40.00 KiB
+config          72.00 KiB
+local           40.00 KiB
+studentdetails   8.00 KiB
+studentdetails> db.studentdetails.find()
+[
+  {
+    _id: ObjectId('6585a57c0d8290ac52c368a3'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244'
+  }
+]
+studentdetails> db.studentdetails.insertOne({"name": "venkat", "place": "bangalore", "pincode": "43244", "Hobies": "cricket"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6585a8930d8290ac52c368a4')
+}
+studentdetails> db.studentdetails.find()
+[
+  {
+    _id: ObjectId('6585a57c0d8290ac52c368a3'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244'
+  },
+  {
+    _id: ObjectId('6585a8930d8290ac52c368a4'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket'
+  }
+]
+studentdetails> db.studentdetails.insertOne({"name": "venkat", "place": "bangalore", "pincode": "43244", "Hobies": "cricket", country: "india"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6585a8d10d8290ac52c368a5')
+}
+studentdetails> db.studentdetails.find()
+[
+  {
+    _id: ObjectId('6585a57c0d8290ac52c368a3'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244'
+  },
+  {
+    _id: ObjectId('6585a8930d8290ac52c368a4'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket'
+  },
+  {
+    _id: ObjectId('6585a8d10d8290ac52c368a5'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  }
+]
+studentdetails> db.studentdetails.insertOne({"name": "venkat", "place": "bangalore", "pincode": "43244", "Hobies": "cricket", country: "india", _id: "myid-myown"})
+{ acknowledged: true, insertedId: 'myid-myown' }
+studentdetails> db.studentdetails.find()
+[
+  {
+    _id: ObjectId('6585a57c0d8290ac52c368a3'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244'
+  },
+  {
+    _id: ObjectId('6585a8930d8290ac52c368a4'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket'
+  },
+  {
+    _id: ObjectId('6585a8d10d8290ac52c368a5'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  },
+  {
+    _id: 'myid-myown',
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  }
+]
+studentdetails> db.studentdetails.insertOne({"name": "abhishek", "place": "bangalore", "pincode": "43244", "Hobies": "cricket", country: "india"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6585a94e0d8290ac52c368a6')
+}
+studentdetails> db.studentdetails.find()
+[
+  {
+    _id: ObjectId('6585a57c0d8290ac52c368a3'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244'
+  },
+  {
+    _id: ObjectId('6585a8930d8290ac52c368a4'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket'
+  },
+  {
+    _id: ObjectId('6585a8d10d8290ac52c368a5'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  },
+  {
+    _id: 'myid-myown',
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  },
+  {
+    _id: ObjectId('6585a94e0d8290ac52c368a6'),
+    name: 'abhishek',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  }
+]
+studentdetails> db.studentdetails.insertOne({"name": "abhishek", "place": "bangalore", "pincode": "43244", "Hobies": "cricket", country: "india", _id: "abhishek_id"})
+{ acknowledged: true, insertedId: 'abhishek_id' }
+studentdetails> db.studentdetails.find()
+[
+  {
+    _id: ObjectId('6585a57c0d8290ac52c368a3'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244'
+  },
+  {
+    _id: ObjectId('6585a8930d8290ac52c368a4'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket'
+  },
+  {
+    _id: ObjectId('6585a8d10d8290ac52c368a5'),
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  },
+  {
+    _id: 'myid-myown',
+    name: 'venkat',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  },
+  {
+    _id: ObjectId('6585a94e0d8290ac52c368a6'),
+    name: 'abhishek',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  },
+  {
+    _id: 'abhishek_id',
+    name: 'abhishek',
+    place: 'bangalore',
+    pincode: '43244',
+    Hobies: 'cricket',
+    country: 'india'
+  }
+]
