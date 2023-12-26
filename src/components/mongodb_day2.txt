@@ -1,0 +1,100 @@
+Microsoft Windows [Version 10.0.19045.3803]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Ext12834>mongosh
+Current Mongosh Log ID: 658aebb079938146b3fb352c
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2
+test> show dbs
+admin            40.00 KiB
+config          108.00 KiB
+local            72.00 KiB
+posts            40.00 KiB
+prodcuts         72.00 KiB
+registration     40.00 KiB
+studentdetails   72.00 KiB
+test> use sampledata
+switched to db sampledata
+sampledata> show dbs
+admin            40.00 KiB
+config          108.00 KiB
+local            72.00 KiB
+posts            40.00 KiB
+prodcuts         72.00 KiB
+registration     40.00 KiB
+studentdetails   72.00 KiB
+sampledata> db.sampledata.insertOne({cricket: "IPL", date: ISODatez('2023-12-26')})
+ReferenceError: ISODatez is not defined
+sampledata> db.sampledata.insertOne({cricket: "IPL", date: ISODate('2023-12-26')})
+{
+  acknowledged: true,
+  insertedId: ObjectId('658aece979938146b3fb352d')
+}
+sampledata> db.sampledata.find()
+[
+  {
+    _id: ObjectId('658aece979938146b3fb352d'),
+    cricket: 'IPL',
+    date: ISODate('2023-12-26T00:00:00.000Z')
+  }
+sampledata> db.comments.insertOne({title: "mongodb", concepts:['database', 'noSql'], content: "mongodb is the data driven database"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('658aed7579938146b3fb352e')
+}
+sampledata> db.comments.find()
+[
+  {
+    _id: ObjectId('658aed7579938146b3fb352e'),
+    title: 'mongodb',
+    concepts: [ 'database', 'noSql' ],
+    content: 'mongodb is the data driven database'
+  }
+]
+sampledata> show dbs
+admin            40.00 KiB
+config          108.00 KiB
+local            72.00 KiB
+posts            40.00 KiB
+prodcuts         72.00 KiB
+registration     40.00 KiB
+sampledata       80.00 KiB
+studentdetails   72.00 KiB
+sampledata> use comments
+switched to db comments
+comments> db.comments.find()
+
+comments> db.sampledata.find()
+
+comments> use sampledata
+switched to db sampledata
+sampledata> db.sampledata.find()
+[
+  {
+    _id: ObjectId('658aece979938146b3fb352d'),
+    cricket: 'IPL',
+    date: ISODate('2023-12-26T00:00:00.000Z')
+  }
+]
+sampledata> db.comments.insertOne({name: "sachin", playerHistory:{matches: 99, history: 30, test: 30000}})
+{
+  acknowledged: true,
+  insertedId: ObjectId('658aef5c79938146b3fb352f')
+}
+sampledata> db.comments.createIndex({playerId:1}, {unqiue: true})
+playerId_1
+sampledata> db.comments.insertMany([{name: sachin, age: 45, country: india}, {name: williamson, age: 36, country: nz}, {name: maxwell, age: 36, country: aus}])
+ReferenceError: sachin is not defined
+sampledata> db.comments.insertMany([{name: sachin1, age: 45, country: india}, {name: williamson, age: 36, country: nz}, {name: maxwell, age: 36, country: aus}])
+ReferenceError: sachin1 is not defined
+sampledata> db.comments.insertMany([{playerId: sachin1, age: 45, country: india}, {name: williamson, age: 36, country: nz}, {name: maxwell, age: 36, country: aus}])
+ReferenceError: sachin1 is not defined
+sampledata> db.comments.insertMany([{name: "sachin1", age: "45", country: "india"}, {name: "williamson", age: "36", country: "nz"}, {name: "maxwell", age: "36", country: "aus"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('658af0ae79938146b3fb3530'),
+    '1': ObjectId('658af0ae79938146b3fb3531'),
+    '2': ObjectId('658af0ae79938146b3fb3532')
+  }
+}
+sampledata>
